@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arun clock</title>
+<style>
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+:root{
+  --theme-color:#8ae977;
+}
+
+body{
+  background-color: #2f3640;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.analog-clock{
+    width: 500px;
+    height: 500px;
+    background-image: url(/photos/pugazhini.jpeg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border:10px ridge var(--theme-color);
+    position: relative;
+}
+
+.analog-clock::before{
+  content:'Arun Clock';
+  color: white;
+  position: absolute;
+  top:25%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 30px;
+  font-family: 'Lobster', cursive;
+
+}
+
+.analog-clock::after{
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color:var(--theme-color);
+  border-radius: 50%;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+ 
+}
+
+.number{
+  --rotate:0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color:var(--theme-color);
+  text-align: center;
+  font-size: 30px;
+  transform: rotate(var(--rotate));
+  font-family: 'Anton', sans-serif;
+
+}
+
+.number-1{ --rotate:30deg;}
+.number-2{ --rotate:60deg;}
+.number-3{ --rotate:90deg;}
+.number-4{ --rotate:120deg;}
+.number-5{ --rotate:150deg;}
+.number-6{ --rotate:180deg;}
+.number-7{ --rotate:210deg;}
+.number-8{ --rotate:240deg;}
+.number-9{ --rotate:270deg;}
+.number-10{ --rotate:300deg;}
+.number-11{ --rotate:330deg;}
+
+
+.needle{
+  --rotation:0;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transform: translateX(-50%) rotate(calc(var(--rotation)*1deg));
+  
+  border-top-left-radius:50%;
+  border-top-right-radius:50%;
+}
+
+
+.sec{
+  background-color: black;
+  width: 3px;
+  height: 40%;
+}
+
+
+.min{
+    background-color: blue;
+  background-size: cover;
+  width: 7px;
+  height: 40%;
+}
+
+
+.hrs{
+    background-color: yellow;
+  background-size: cover;
+  width: 10px;
+  height: 25%;
+}
+</style>
+
+
+</head>
+<body>
+    <div class="analog-clock">
+        <div class="needle hrs"></div>
+        <div class="needle min"></div>
+        <div class="needle sec"></div> 
+        <div class="number number-1">1</div>
+        <div class="number number-2">2</div>
+        <div class="number number-3">3</div>
+        <div class="number number-4">4</div>
+        <div class="number number-5">5</div>
+        <div class="number number-6">6</div>
+        <div class="number number-7">7</div>
+        <div class="number number-8">8</div>
+        <div class="number number-9">9</div>
+        <div class="number number-10">10</div>
+        <div class="number number-11">11</div>
+        <div class="number number-12">12</div>
+  
+      </div>
+
+      <script>
+        const hour=document.querySelector('.hrs');
+const minute=document.querySelector('.min');
+const second=document.querySelector('.sec');
+
+setInterval(runClock,1000);
+
+function runClock(){
+  const time=new Date();
+  const sec=time.getSeconds()/60;
+  const min=(sec+time.getMinutes())/60;
+  const hrs=(min+time.getHours())/12;
+  hour.style.setProperty('--rotation',hrs*360);
+  minute.style.setProperty('--rotation',min*360);
+  second.style.setProperty('--rotation',sec*360);
+
+}
+
+runClock();
+      </script>
+</body>
+</html>
